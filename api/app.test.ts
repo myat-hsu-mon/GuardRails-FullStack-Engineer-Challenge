@@ -62,9 +62,9 @@ describe("Results API", () => {
       });
   });
 
-  it("PUT api/v1/results/63085939434fe7b8cff208be --> return updated result{}", () => {
+  it("PUT api/v1/results/63075e2c8a429ffd3565684d --> return updated result{}", () => {
     return request(app)
-      .put("/api/v1/results/63085939434fe7b8cff208be")
+      .put("/api/v1/results/63075e2c8a429ffd3565684d")
       .send({
         repositoryName: "Update Testing for Educational Platform",
       })
@@ -116,9 +116,9 @@ describe("Results API", () => {
       });
   });
 
-  it("GET api/v1/results/63085939434fe7b8cff208be --> return result{}", () => {
+  it("GET api/v1/results/63075e2c8a429ffd3565684d --> return result{}", () => {
     return request(app)
-      .get("/api/v1/results/63085939434fe7b8cff208be")
+      .get("/api/v1/results/63075e2c8a429ffd3565684d")
       .expect(200)
       .expect("Content-Type", /json/i)
       .then(function (res: {
@@ -159,5 +159,12 @@ describe("Results API", () => {
         expect(message).toEqual("No result found with this id");
         expect(error).toBeTruthy();
       });
+  });
+
+  it("DELETE api/v1/results/630749ac8a429ffd356566c5 --> return 404 not found with this id", () => {
+    return request(app)
+      .delete("/api/v1/results/630749ac8a429ffd356566c5")
+      .expect(404)
+      .expect("Content-Type", /json/i);
   });
 });
