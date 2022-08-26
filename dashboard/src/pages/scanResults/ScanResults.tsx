@@ -1,12 +1,11 @@
 import { FC, SyntheticEvent, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Grid, Label, Table } from "semantic-ui-react";
+import { Grid, Label, Message, Table } from "semantic-ui-react";
 //api
 import { getAllResults } from "../../api/result";
 //shared
-import MessageUI from "../../shared/message/Message";
-import NavigationMenu from "../../shared/navigationMenu/NavigationMenu";
 import NoResultFound from "../../shared/noResultFound/NoResultFound";
+import NavigationMenu from "../../shared/navigationMenu/NavigationMenu";
 //utils
 import { formatDateAndTime } from "../../utils/formatDate";
 //css
@@ -67,7 +66,9 @@ const ScanResults: FC = () => {
       <div className={classes.contentContainer}>
         {errors ? (
           <div data-testid="message">
-            <MessageUI success={false} message={errors} />
+            <Message negative size="tiny">
+              <Message.Header>{errors}</Message.Header>
+            </Message>
           </div>
         ) : !!results.length ? (
           <Grid>
