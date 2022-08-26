@@ -73,9 +73,28 @@ Please do the following instructions for react.js application.
 - npm run build ( To build )
 - npm run test ( To test )
 
-## Environment Variables for Server
+## Run Locally
 
-To run this project, you will need to add the following environment variables to your .env file
+Clone the project
 
-`PORT`
-`MONGODB_URL`
+```bash
+  git clone https://github.com/myat-hsu-mon/monorepo
+```
+
+Go to the project directory
+
+```bash
+  cd monorepo
+```
+
+Install dependencies
+
+```bash
+  docker-compose up
+```
+
+Start the server on your browser
+
+```bash
+  http://localhost:3000
+```
