@@ -22,3 +22,15 @@ export const getAllResults = catchAsync(
     });
   }
 );
+
+export const createNewResult = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const result = await Result.create(req.body);
+
+    res.status(201).json({
+      success: true,
+      message: "A new result is created",
+      data: result,
+    });
+  }
+);
