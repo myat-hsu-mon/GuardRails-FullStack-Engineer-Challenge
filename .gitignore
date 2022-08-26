@@ -22,3 +22,5 @@ dashboard/.env.production.local
 dashboard/npm-debug.log*
 dashboard/yarn-debug.log*
 dashboard/yarn-error.log*
+
+dashboard/.env
