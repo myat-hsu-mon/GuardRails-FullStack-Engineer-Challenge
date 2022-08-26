@@ -116,3 +116,19 @@ describe("Results API", () => {
       });
   });
 });
+
+it("GET api/v1/results/63085939434fe7b8cff208be --> return result{}", () => {
+  return request(app)
+    .get("/api/v1/results/63085939434fe7b8cff208be")
+    .expect(200)
+    .expect("Content-Type", /json/i)
+    .then(function (res: {
+      body: { data: any; success: string; message: string };
+    }) {
+      const { data, success, message } = res.body;
+      expect(success).toBe(true);
+      expect(message).toBe("A result is retrieved");
+      expect(data).not.toEqual(expect.objectContaining({ greet: "hello" }));
+      expect(data).toBeTruthy();
+    });
+});
