@@ -7,7 +7,7 @@ const xss = require("xss-clean");
 const rateLimiter = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
 //app
-import app from "./server";
+export const app = require("./server");
 //routes
 import resultRoute from "./routes/resultRoute";
 //controllers
