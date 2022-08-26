@@ -72,7 +72,7 @@ export const deleteResult = catchAsync(
 
     if (!result) return next(new AppError("No result found with this id", 404));
 
-    res.status(403).json({
+    res.status(204).json({
       success: true,
       message: "A result is deleted",
     });
