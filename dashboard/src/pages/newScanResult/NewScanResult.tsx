@@ -8,6 +8,7 @@ import {
   Button,
   Card,
   Icon,
+  Message,
 } from "semantic-ui-react";
 //api
 import { createResult } from "../../api/result";
@@ -40,6 +41,7 @@ class NewScanResult extends Component {
         severity: "",
       },
     ],
+    errors: null,
   };
 
   handleItemClick = (e: SyntheticEvent, data: any) => {
@@ -142,8 +144,15 @@ class NewScanResult extends Component {
           activeItem: "results",
         }));
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
+      this.setState((prev) => ({
+        ...prev,
+        isLoading: false,
+        errors: error.response
+          ? error.response.data?.message
+          : "Internal Server Error",
+      }));
     }
   };
 
@@ -155,6 +164,7 @@ class NewScanResult extends Component {
       repositoryName,
       fields,
       isLoading,
+      errors,
     } = this.state;
     return (
       <div className={classes.container}>
@@ -321,11 +331,17 @@ class NewScanResult extends Component {
                         <Icon name="minus" />
                       </Button>
                     </Segment>
+                    {errors && (
+                      <Message negative size="tiny">
+                        <Message.Header>{errors}</Message.Header>
+                      </Message>
+                    )}
                     <Form.Group>
                       <Button
                         type="button"
                         onClick={this.handleCancel}
                         data-testid="cancelBtn"
+                        size="tiny"
                       >
                         Cancel
                       </Button>
@@ -334,6 +350,7 @@ class NewScanResult extends Component {
                         color="teal"
                         loading={isLoading}
                         data-testid="addBtn"
+                        size="tiny"
                       >
                         Add New Scan
                       </Button>
