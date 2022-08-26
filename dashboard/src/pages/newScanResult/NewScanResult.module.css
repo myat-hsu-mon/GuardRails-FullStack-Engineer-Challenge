@@ -1,0 +1,21 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  background-color: #153d50;
+  overflow-y: auto;
+}
+
+.contentContainer {
+  padding: 5rem;
+  padding-bottom: 1rem;
+  height: 100%;
+}
+
+.formColumn {
+  max-width: 90vw;
+}
+
+.mt-3 {
+  margin-top: 3rem;
+}
