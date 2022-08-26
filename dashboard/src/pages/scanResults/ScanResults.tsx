@@ -49,7 +49,7 @@ const ScanResults: FC = () => {
     } catch (error: any) {
       console.error(error);
       setErrors(
-        error.response ? error.response.data.message : "Internal Server Error"
+        error.response ? error.response.data?.message : "Internal Server Error"
       );
     }
   };
