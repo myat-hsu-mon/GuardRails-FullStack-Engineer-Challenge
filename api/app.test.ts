@@ -97,4 +97,22 @@ describe("Results API", () => {
         expect(error).toBeTruthy();
       });
   });
+
+  it("PUT api/v1/results/630749ac8a429ffd356566c5 --> return 404 not found with this id", () => {
+    return request(app)
+      .put("/api/v1/results/630749ac8a429ffd356566c5")
+      .send({
+        repositoryName: "404 not found",
+      })
+      .expect(404)
+      .expect("Content-Type", /json/i)
+      .then(function (res: {
+        body: { error: any; success: string; message: string };
+      }) {
+        const { error, success, message } = res.body;
+        expect(success).toBe(false);
+        expect(message).toEqual("No result found with this id");
+        expect(error).toBeTruthy();
+      });
+  });
 });
