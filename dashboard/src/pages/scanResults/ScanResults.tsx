@@ -25,8 +25,6 @@ const ScanResults: FC = () => {
   const [errors, setErrors] = useState<string>();
 
   const handleItemClick = (e: SyntheticEvent, data: any) => {
-    console.log({ data });
-
     setActiveItem(data.name);
     if (data.name === "home") {
       navigate("/");
