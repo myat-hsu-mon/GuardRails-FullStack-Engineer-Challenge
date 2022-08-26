@@ -34,3 +34,17 @@ export const createNewResult = catchAsync(
     });
   }
 );
+
+export const getResult = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const result = await Result.findById(req.params.id);
+
+    if (!result) return next(new AppError("No result found with this id", 404));
+
+    res.status(200).json({
+      success: true,
+      message: "A result is retrieved",
+      data: result,
+    });
+  }
+);
