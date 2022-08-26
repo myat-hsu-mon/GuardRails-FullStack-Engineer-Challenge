@@ -80,4 +80,21 @@ describe("Results API", () => {
         expect(data).toBeTruthy();
       });
   });
+
+  it("PUT api/v1/results/6 --> return 400 bad request mongoose id cast error", () => {
+    return request(app)
+      .put("/api/v1/results/6")
+      .send({
+        repositoryName: "Update Testing for Educational Platform",
+      })
+      .expect(400)
+      .expect("Content-Type", /json/i)
+      .then(function (res: {
+        body: { error: any; success: string; message: string };
+      }) {
+        const { error, success } = res.body;
+        expect(success).toBe(false);
+        expect(error).toBeTruthy();
+      });
+  });
 });
