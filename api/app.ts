@@ -24,11 +24,21 @@ const limiter = rateLimiter({
 //middlewares
 app.use(express.json({ limit: "10kb" }));
 app.use(cors());
-app.use(morgan("dev")); // logger
-app.use(helmet()); // To set secure http headers
-app.use("/api", limiter); // To limit too many attempts(Brute-force Attack)
-app.use(xss()); // To prevent xss attack
-app.use(mongoSanitize()); // To prevent nosql injections
+
+// logger
+app.use(morgan("dev"));
+
+// To set secure http headers
+app.use(helmet());
+
+// To limit too many attempts(Brute-force Attack)
+app.use("/api", limiter);
+
+// To prevent xss attack
+app.use(xss());
+
+// To prevent nosql injections
+app.use(mongoSanitize());
 
 app.use("/api/v1/results", resultRoute);
 app.all("*", (req: Request, res: Response, next: NextFunction) => {
