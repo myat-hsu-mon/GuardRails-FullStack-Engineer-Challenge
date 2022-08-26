@@ -132,3 +132,17 @@ it("GET api/v1/results/63085939434fe7b8cff208be --> return result{}", () => {
       expect(data).toBeTruthy();
     });
 });
+
+it("GET api/v1/results/6 --> return 400 bad request mongoose id cast error", () => {
+  return request(app)
+    .get("/api/v1/results/6")
+    .expect(400)
+    .expect("Content-Type", /json/i)
+    .then(function (res: {
+      body: { error: any; success: string; message: string };
+    }) {
+      const { error, success } = res.body;
+      expect(success).toBe(false);
+      expect(error).toBeTruthy();
+    });
+});
