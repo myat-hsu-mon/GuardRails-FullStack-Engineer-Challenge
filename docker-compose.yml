@@ -1,0 +1,34 @@
+version: "3"
+services:
+  api:
+    container_name: api-container
+    image: api
+    restart: always
+    build:
+      context: ./api
+      dockerfile: ./Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - MONGODB_URL=mongodb://mongo:27017/monorepo
+    depends_on:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
+
+  dashboard:
+    container_name: dashboard-container
+    image: dashboard
+    build:
+      context: ./dashboard
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
