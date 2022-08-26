@@ -93,7 +93,7 @@ const DetailScanResult: FC = () => {
                   <Table.Cell>{finding.metadata.description}</Table.Cell>
                   <Table.Cell>{finding.metadata.severity}</Table.Cell>
                   <Table.Cell>
-                    {finding.location.path} :{" "}
+                    {finding.location.path} : line{" "}
                     {finding.location.positions.begin.line}
                   </Table.Cell>
                 </Table.Row>
