@@ -10,5 +10,4 @@ COPY . .
 
 EXPOSE 8000
 
-# CMD [ "ts-node-dev","--respawn", "--transpile-only", "app.ts" ]
 CMD [ "npm", "run", "start"]
