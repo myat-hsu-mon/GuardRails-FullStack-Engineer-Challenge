@@ -49,11 +49,19 @@ Please do the following instructions for node.js application.
   PUT /api/v1/results/${id}
 ```
 
+| Parameter | Type     | Description                        |
+| :-------- | :------- | :--------------------------------- |
+| `id`      | `string` | **Required**. Id of item to update |
+
 #### Delete result
 
 ```http
   DELETE /api/v1/results/${id}
 ```
+
+| Parameter | Type     | Description                        |
+| :-------- | :------- | :--------------------------------- |
+| `id`      | `string` | **Required**. Id of item to delete |
 
 ## To Run Client
 
