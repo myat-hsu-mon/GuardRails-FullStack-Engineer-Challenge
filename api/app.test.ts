@@ -115,34 +115,49 @@ describe("Results API", () => {
         expect(error).toBeTruthy();
       });
   });
-});
 
-it("GET api/v1/results/63085939434fe7b8cff208be --> return result{}", () => {
-  return request(app)
-    .get("/api/v1/results/63085939434fe7b8cff208be")
-    .expect(200)
-    .expect("Content-Type", /json/i)
-    .then(function (res: {
-      body: { data: any; success: string; message: string };
-    }) {
-      const { data, success, message } = res.body;
-      expect(success).toBe(true);
-      expect(message).toBe("A result is retrieved");
-      expect(data).not.toEqual(expect.objectContaining({ greet: "hello" }));
-      expect(data).toBeTruthy();
-    });
-});
+  it("GET api/v1/results/63085939434fe7b8cff208be --> return result{}", () => {
+    return request(app)
+      .get("/api/v1/results/63085939434fe7b8cff208be")
+      .expect(200)
+      .expect("Content-Type", /json/i)
+      .then(function (res: {
+        body: { data: any; success: string; message: string };
+      }) {
+        const { data, success, message } = res.body;
+        expect(success).toBe(true);
+        expect(message).toBe("A result is retrieved");
+        expect(data).not.toEqual(expect.objectContaining({ greet: "hello" }));
+        expect(data).toBeTruthy();
+      });
+  });
 
-it("GET api/v1/results/6 --> return 400 bad request mongoose id cast error", () => {
-  return request(app)
-    .get("/api/v1/results/6")
-    .expect(400)
-    .expect("Content-Type", /json/i)
-    .then(function (res: {
-      body: { error: any; success: string; message: string };
-    }) {
-      const { error, success } = res.body;
-      expect(success).toBe(false);
-      expect(error).toBeTruthy();
-    });
+  it("GET api/v1/results/6 --> return 400 bad request mongoose id cast error", () => {
+    return request(app)
+      .get("/api/v1/results/6")
+      .expect(400)
+      .expect("Content-Type", /json/i)
+      .then(function (res: {
+        body: { error: any; success: string; message: string };
+      }) {
+        const { error, success } = res.body;
+        expect(success).toBe(false);
+        expect(error).toBeTruthy();
+      });
+  });
+
+  it("GET api/v1/results/630749ac8a429ffd356566c5 --> return 404 not found with this id", () => {
+    return request(app)
+      .get("/api/v1/results/630749ac8a429ffd356566c5")
+      .expect(404)
+      .expect("Content-Type", /json/i)
+      .then(function (res: {
+        body: { error: any; success: string; message: string };
+      }) {
+        const { error, success, message } = res.body;
+        expect(success).toBe(false);
+        expect(message).toEqual("No result found with this id");
+        expect(error).toBeTruthy();
+      });
+  });
 });
