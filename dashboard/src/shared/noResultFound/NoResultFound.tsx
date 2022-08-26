@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { Grid, Header } from "semantic-ui-react";
 
 const NoResultFound: FC<{ text: string }> = ({ text }) => {
@@ -20,4 +20,4 @@ const NoResultFound: FC<{ text: string }> = ({ text }) => {
   );
 };
 
-export default NoResultFound;
+export default memo(NoResultFound);

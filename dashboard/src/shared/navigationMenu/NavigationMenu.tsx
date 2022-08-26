@@ -1,4 +1,4 @@
-import { FC, SyntheticEvent } from "react";
+import { FC, memo, SyntheticEvent } from "react";
 import { Menu } from "semantic-ui-react";
 
 interface INavigationMenuProps {
@@ -31,4 +31,4 @@ const NavigationMenu: FC<INavigationMenuProps> = ({
   );
 };
 
-export default NavigationMenu;
+export default memo(NavigationMenu);
