@@ -61,4 +61,23 @@ describe("Results API", () => {
         expect(data).toBeTruthy();
       });
   });
+
+  it("PUT api/v1/results/63085939434fe7b8cff208be --> return updated result{}", () => {
+    return request(app)
+      .put("/api/v1/results/63085939434fe7b8cff208be")
+      .send({
+        repositoryName: "Update Testing for Educational Platform",
+      })
+      .expect(201)
+      .expect("Content-Type", /json/i)
+      .then(function (res: {
+        body: { data: any; success: string; message: string };
+      }) {
+        const { data, success, message } = res.body;
+        expect(success).toBe(true);
+        expect(message).toBe("A result is updated");
+        expect(data).not.toEqual(expect.objectContaining({ name: "test" }));
+        expect(data).toBeTruthy();
+      });
+  });
 });
