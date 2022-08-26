@@ -87,7 +87,7 @@ Go to the project directory
   cd monorepo
 ```
 
-Install dependencies
+Run the docker-compose file
 
 ```bash
   docker-compose up
