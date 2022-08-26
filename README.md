@@ -73,12 +73,6 @@ Please do the following instructions for react.js application.
 - npm run build ( To build )
 - npm run test ( To test )
 
-## Environment Variables for Client
-
-To run this project, you will need to add the following environment variable to your .env file
-
-`REACT_APP_BACKEND_URL`
-
 ## Environment Variables for Server
 
 To run this project, you will need to add the following environment variables to your .env file
