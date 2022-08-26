@@ -24,4 +24,41 @@ describe("Results API", () => {
         expect(data).toBeTruthy();
       });
   });
+
+  it("POST api/v1/results --> return created result{}", () => {
+    return request(app)
+      .post("/api/v1/results")
+      .send({
+        status: "Queued",
+        repositoryName: "Testing Result",
+        findings: {
+          type: "sast",
+          ruleId: "G402",
+          location: {
+            path: "connectors/apigateway.go",
+            positions: {
+              begin: {
+                line: 60,
+              },
+            },
+          },
+          metadata: {
+            description: "TLS InsecureSkipVerify set true.",
+            severity: "HIGH",
+          },
+        },
+        queuedAt: new Date(),
+      })
+      .expect(201)
+      .expect("Content-Type", /json/i)
+      .then(function (res: {
+        body: { data: any; success: string; message: string };
+      }) {
+        const { data, success, message } = res.body;
+        expect(success).toBe(true);
+        expect(message).toBe("A new result is created");
+        expect(data).not.toEqual(expect.objectContaining({ name: "test" }));
+        expect(data).toBeTruthy();
+      });
+  });
 });
