@@ -65,3 +65,16 @@ export const updateResult = catchAsync(
     });
   }
 );
+
+export const deleteResult = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const result = await Result.findByIdAndDelete(req.params.id);
+
+    if (!result) return next(new AppError("No result found with this id", 404));
+
+    res.status(403).json({
+      success: true,
+      message: "A result is deleted",
+    });
+  }
+);
