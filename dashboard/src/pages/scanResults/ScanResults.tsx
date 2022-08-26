@@ -7,8 +7,17 @@ import { getAllResults } from "../../api/result";
 import MessageUI from "../../shared/message/Message";
 import NavigationMenu from "../../shared/navigationMenu/NavigationMenu";
 import NoResultFound from "../../shared/noResultFound/NoResultFound";
+//utils
+import { formatDateAndTime } from "../../utils/formatDate";
 //css
 import classes from "./ScanResults.module.css";
+
+const colors: any = {
+  Queued: "grey",
+  "In Progress": "teal",
+  Success: "green",
+  Failure: "red",
+};
 
 const ScanResults: FC = () => {
   const navigate = useNavigate();
@@ -75,14 +84,18 @@ const ScanResults: FC = () => {
                 {results.map((result: any) => (
                   <Table.Row key={result._id}>
                     <Table.Cell>{result.repositoryName}</Table.Cell>
-                    <Table.Cell>{result.status}</Table.Cell>
+                    <Table.Cell>
+                      <Label color={colors[result.status]} size="tiny" basic>
+                        {result.status}
+                      </Label>
+                    </Table.Cell>
                     <Table.Cell>
                       <Link to={`/results/${result._id}`}>
                         <div className={classes.label}>
                           <span style={{ textDecoration: "underline" }}>
                             View Detail
                           </span>
-                          <Label circular color="teal">
+                          <Label circular color="teal" size="tiny">
                             {result.findings.length}
                           </Label>
                         </div>
@@ -90,10 +103,10 @@ const ScanResults: FC = () => {
                     </Table.Cell>
                     <Table.Cell>
                       {result.status === "Queued"
-                        ? result.queuedAt
+                        ? formatDateAndTime(result.queuedAt)
                         : result.status === "In Progress"
-                        ? result.scannedAt
-                        : result.finishedAt}
+                        ? formatDateAndTime(result.scannedAt)
+                        : formatDateAndTime(result.finishedAt)}
                     </Table.Cell>
                   </Table.Row>
                 ))}
