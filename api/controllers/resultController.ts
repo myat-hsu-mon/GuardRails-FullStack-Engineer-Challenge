@@ -48,3 +48,20 @@ export const getResult = catchAsync(
     });
   }
 );
+
+export const updateResult = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const result = await Result.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!result) return next(new AppError("No result found with this id", 404));
+
+    res.status(201).json({
+      success: true,
+      message: "A result is updated",
+      data: result,
+    });
+  }
+);
