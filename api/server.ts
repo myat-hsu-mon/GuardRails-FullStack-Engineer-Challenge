@@ -1,11 +1,11 @@
-import express from "express";
+import express, { Application } from "express";
 import mongoose from "mongoose";
 import "dotenv/config";
 
 const port = process.env.PORT;
-const mongodbUrl: string = process.env.MONGODB_URL || "";
+const mongodbUrl = process.env.MONGODB_URL || "";
 
-const app = express();
+const app: Application = express();
 
 mongoose
   .connect(mongodbUrl)
@@ -30,4 +30,4 @@ process.on("uncaughtException", (error) => {
   process.exit(1);
 });
 
-export default app;
+module.exports = app;
